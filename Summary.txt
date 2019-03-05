@@ -1,0 +1,2 @@
+This solution is a catch-all for all the basics we'll encounter. 
+The projects and their brief descriptions are included here:
