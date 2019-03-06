@@ -1,8 +1,10 @@
 // Dijkstra.cpp : Implements dijkstra in a weighted bidirectional graph
-//we'll have to redo this later. This one's a mess.
 // need a priority queue. The alogirthm ends when the destination is on top of the priority queue
-// also, the queue memebers/nodes need to have their "came from" field populated
-// 
+// also, the queue memebers/nodes need to have their "came from" field populated if we are to find the way back
+
+// dijkstra takes in arguments:
+// start node, end node, number of nodes, array* of nodes, array** connection map
+// returns int min dist and also edits the array* nodes if you want the path info
 
 #include "pch.h"
 #include <iostream>
@@ -10,37 +12,54 @@ using namespace std;
 
 class Node	//not graph node. just a barebones queue structure
 {
-	int nodeNumber;
-	Node* next;
+	int nodeName;
+	int cameFrom;
+	int distance;
+	Node* next;	// next in queue, when in queue
 public:
-	Node() = delete;
-	Node(int n)
+	Node()
 	{
-		nodeNumber = n;
+		nodeName = cameFrom = -1;
+		distance = 2147483647; // infinity basically
 		next = nullptr;
 	}
 
-	int getValue()
+	void setName(int n) { nodeName = n; }
+	void setFrom(int from) { cameFrom = from; }
+	void setDist(int d) { distance = d; }
+	void setNext(Node* n) { next = n; }
+
+	int getName() { return nodeName; }
+	int getFrom() { return cameFrom; }
+	int getDist() { return distance; }
+	// getNext is unnecessary
+
+	Node* insert(Node* vertex)	// complete the priority queue pls
 	{
-		return nodeNumber;
+		if (vertex->distance < distance) // new guy in front of me
+		{
+			vertex->next = this;
+			return vertex;
+		}
+		else if (vertex->distance >= distance && (next == nullptr || next->distance > vertex->distance)) // sht ckt
+		{
+			vertex->next = next;
+			next = vertex;
+			return this;
+		}
+		else // new goes further down the line. not my problem
+		{
+			next->insert(vertex);
+			return this;
+		}
 	}
 
-	bool pushNode(Node* n)
-	{
-		if (next == nullptr)
-			next = n;
-		else
-			(*next).pushNode(n);
-	}
-
-	Node* popNode()
-	{
-		return next;
-	}
+	Node* pop() { return next; }
 };
 
-// class queue not even needed
-int dijkstra(int , int , int , int* ); //defined after main()
+// queue is basically a Node*. 
+
+int dijkstra(int , int , int , int* , Node* ); //defined after main()
 
 int main()
 {
@@ -73,62 +92,71 @@ int main()
 		connectionMap[n*end + start] = weight;	//connection[start][end] is flipped on
 	}
 
-	/*
-	//print the captured data pls
-	for (int i = 0; i < n; i++)
-	{
-		for (int j = 0; j < n; j++)
-		{
-			cout << connectionMap[n*i + j] << " ";
-		}
-		cout << endl;
-	}
-	*/
-
 	cout << "Enter start and destination nodes: ";
 	int start, end;
 	cin >> start >> end;
 
-	cout << "The shortest distance is: " << dijkstra(start, end, n, connectionMap);
+	// This is the start of the algorithm
+	Node* nodes = new Node[n];
+	for (int i = 0; i < n; i++)
+		nodes[i].setName(i);
+
+	cout << "The shortest distance is: " << dijkstra(start, end, n, connectionMap, nodes) << endl;
+	
+	//messy stuff
+	int tracker = end;
+	while(tracker != start)
+	{
+		cout << tracker << " ";
+		tracker = nodes[tracker].getFrom();
+	}
+
+	delete[] nodes;
+	// clean up and end the alogorithm
 
 	return 0;
 }
 
-int dijkstra(int start, int end, int n, int* connectionMap)
+int dijkstra(int start, int end, int n, int* connectionMap, Node* nodes)
 {
-	int* distances = new int[n];
-	distances[start] = 0;
-	for (int i = 0; i < n; i++)
-	{
-		if (i == start)
-			distances[i] = 0;
-		else distances[i] = 10000000000; // max int really
-	}
+	nodes[start].setDist(0);
+	Node* queue = &nodes[start];
 
-	Node queue(start);	// starting the queue in stack
-	//a list of all nodes. we'll link up as necessary
-	Node vertices = new Node(0)[n];
-	while (unfinished)	// ========================================= NEEDS RECHECKING ===========
+	bool doneFlag = false;
+	while (!doneFlag)
 	{
-		// current node is:
-		int nodeNow = queue.getValue();
+		// check the member on top of the queue. pop.
+		int now = 0;
+		if (queue != nullptr)
+		{
+			now = queue->getName();
+		}
+		else
+		{
+			doneFlag = true;
+			break;
+		}
 
-		// find the places we can go from here
+		if (now == end)
+		{
+			return nodes[end].getDist();
+		}
+
+		// set its neighbours' distances and cameFrom. push into the queue
 		for (int i = 0; i < n; i++)
 		{
-			if (connectionMap[n*nodeNow + i] != 0)
+			if (i != now && connectionMap[n*now + i] != 0 
+				&& nodes[i].getDist() > nodes[now].getDist()+connectionMap[n*now + i])
 			{
-				int distance = distances[start] + connectionMap[n*nodeNow + i];
-				if (distance < distances[i])
-				{
-					distances[i] = distance;
-					queue.pushNode();	//can't create node, it'll go out of scope
-				}
+				nodes[i].setDist(nodes[now].getDist() + connectionMap[n*now + i]);
+				nodes[i].setFrom(now);
+				queue = queue->insert(&nodes[i]);
 			}
 		}
-		//update distances to that place, and add the place to the queue
-
+		queue = queue->pop();
+		//break when the top is the destination
 	}
-	// return the distance value on the end node
-	return 1;
+
+
+	return 0; // we couldn't find a path
 }
