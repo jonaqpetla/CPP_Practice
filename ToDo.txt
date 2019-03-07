@@ -1,0 +1,6 @@
+1. Optimize dijkstra
+2. Fractionals in base converter
+3. Matrix Library
+4. Prime only needs to go upto i/j
+5. Heaps
+6. Heap sort

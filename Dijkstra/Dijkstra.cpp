@@ -20,7 +20,7 @@ public:
 	Node()
 	{
 		nodeName = cameFrom = -1;
-		distance = 2147483647; // infinity basically
+		distance = 2147483647; // infinity basically. some implementations use <limits.h> for this number
 		next = nullptr;
 	}
 
