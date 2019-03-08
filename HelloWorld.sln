@@ -13,7 +13,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FiboNaiive", "FiboNaiive\Fi
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BaseConverter", "BaseConverter\BaseConverter.vcxproj", "{9E5CD49C-541F-452F-B573-9740001FB3D2}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "asciiTable", "asciiTable\asciiTable.vcxproj", "{F056CA1C-AE77-4C04-8018-1D03A773F5EC}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "asciiTable_Strings", "asciiTable\asciiTable.vcxproj", "{F056CA1C-AE77-4C04-8018-1D03A773F5EC}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MatrixLibrary", "MatrixLibrary\MatrixLibrary.vcxproj", "{4B5E26DC-9ABE-40A1-B79D-E4841F5E9D26}"
 EndProject
@@ -29,6 +29,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Text Files", "Text Files", 
 	ProjectSection(SolutionItems) = preProject
 		Cherno.txt = Cherno.txt
 		Summary.txt = Summary.txt
+		ToDo.txt = ToDo.txt
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CopyConstructorDemo", "CopyConstructorDemo\CopyConstructorDemo.vcxproj", "{E374A2E9-ABBE-43D9-8C8C-E265937BFE9A}"
