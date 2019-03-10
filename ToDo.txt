@@ -1,5 +1,4 @@
 1. Polish dijkstra
 2. Heaps, heap sort
-3. Operator precedence example.
-4. Base converter for fractions
-5. Matrix library flesh out
+3. Base converter for fractions
+4. Matrix library flesh out

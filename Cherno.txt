@@ -1,35 +1,65 @@
-The guidance from our sole lord and savior, Cherno.
+The guidance from our sole lord and savior, Cherno. Also some additional snippets.
 
-1. <iostream> cuz the file is in $PATH. "lol.cpp" cuz relative to current directory.
-2. #ifndef _LOL
+
+>>  <iostream> cuz the file is in $PATH. "lol.cpp" cuz relative to current directory.
+
+>>  #ifndef _LOL
 	#define _LOL
 	//write stuff to be defined only once, that's, if not defined already.
 	#endif
-3. compiler makes translation files, linker links them. #include will copy paste all the code into one file,
+
+>>  compiler makes translation files, linker links them. #include will copy paste all the code into one file,
 	that's not necessary if we have a linker.
-4. Debug magic: right click to view disassembly. debug>window>memory to view stack in VS
-5. reference (brother of pointer, just cleaner): int& value is a variable of type reference. 
-	int a =5; 
+
+>>  Debug magic: right click to view disassembly. debug>window>memory to view stack in VS
+
+>>  Operator precedence: https://docs.microsoft.com/en-us/cpp/cpp/cpp-built-in-operators-precedence-and-associativity?view=vs-2017
+	:: (scope resolution)
+	. -> [] () postfix++ -- type() const_cast dynamic_cast reinterpret_cast static_cast
+	++prefix -- sizeof() ~one's complement ! unary- + & * new delete (type cast)
+	.* ->* (pointer to member)
+	* / %	(multiply, divide, modulus)
+	+ -		(plus, minus)
+	<< >>
+	< <= > >= 
+	== !=
+	&	(bitwise and)
+	^	(bitwise xor)
+	|	(bitwise or)
+	&&	(logical)
+	|| 
+	? : (conditional. evaluates left to right, short circuiting)
+	= *= /= %= += -= <<= >>= &= |= ^=
+	throw
+	,
+
+>>  reference (brother of pointer, just cleaner): int& value is a variable of type reference. 
+	int a = 5; 
 	int& value = a; 
 	now value means a, it's another name. See function pass by reference to check syntax. 
 	I like working with pointers (equivalent), but pointers can become clumsy after a while. 
 	int& val; // is invalid. 
 	int& val = a; 
 	val = b; //will act as a = b and reference won't change.
-6. static and extern (outside class): 
+	C doesn't have references.
+
+>>  static and extern (outside class): 
 	limit the scope of the variable to inside/outside the translation unit. 
 	Linker will not look at other files for the static variable or function.
-7. static in class means only one instance of that variable or function shared across all instances of the class. 
+
+>>  static in class means only one instance of that variable or function shared across all instances of the class. 
 	className::variable = 5; 
 	className::function(); 
 	NOT instance.variable = 5; 
 	A static method doesn't have an associated class instance, so it can't access members of an instance by 
 	default. We can pass an instance as a parameter tho.
-8. local static to limit the scope (maybe to an if block), but keep it. 
+
+>>  local static to limit the scope (maybe to an if block), but keep it. 
 	function(){
 		static remember; 
 	} //remember will hold its value across function calls.
-9. enum example {
+
+>>  enum example {
 	A = 5, B, C
 	}; 
 	//or enum example:char to reduce memory requirements
@@ -37,20 +67,27 @@ The guidance from our sole lord and savior, Cherno.
 	example value = B;
 	value == 6; //is true
 	enums are just integers behind the scenes.
-10. C++ default constructor does nothing. Java or C# actually initialises ints and floats to 0. 
+
+>>  C++ default constructor does nothing. Java or C# actually initialises ints and floats to 0. 
 	public: className() = delete; //gets rid of the default constructor
-11. 0.0f means float 0. e.g. float i = 13.45f;
-12. destructor. ~className(). Stack allocated vs heap allocated memory. Can avoid usually.
-13. Inheritance to remove code duplication. class human : public livingThing {};
-14. virtual functions to be overridden by an inherited class. Minor additional performance overhead.
+
+>>  0.0f means float 0. e.g. float i = 13.45f; 0.0 will default to double. (double and ints are defaults)
+
+>>  destructor. ~className(). Stack allocated vs heap allocated memory. Can avoid usually.
+
+>>  Inheritance to remove code duplication. class human : public livingThing {};
+
+>>  virtual functions to be overridden by an inherited class. Minor additional performance overhead.
 	Every inherited class is also the base class behind the scene, and functions get confused somethimes.
 	Marking the function in the base class as virtual, generates a v-table and in case the function is overridden,
 	makes sure to use the overridden function. You can also optionally mark the overridden fxn as override.
 	pure virtual function: doesn't have a body in the base class. Forces the derived classes to implement it.
 	It's called an interface.
 	virtual std::string functionName() = 0; //class cannot be instantiated unless we have implemented it
-15. visibily modifier: private, protected, public. protected means subclasses can access that shit
-16. int example[5]; //creates stuff in the stack and will be destroyed with the function. 
+
+>>  visibily modifier: private, protected, public. protected means subclasses can access that shit
+
+>>  int example[5]; //creates stuff in the stack and will be destroyed with the function. 
 	int* example = new int[5];  //will create stuff in heap and we'll have to delete it later as 
 	delete[] example; //This is called allocating dynamically. We do this to play with the lifetimes. 
 	e.g. function returning a new array. An object containing an array as in int example[5] will have 
@@ -58,10 +95,12 @@ The guidance from our sole lord and savior, Cherno.
 	int* something = new int[5]. Pointer to a pointer in that case. Stack allocated pointers can have 
 	sizeof(example) return number of bytes  in the array. sizeof(something) will return bytes in an int pointer.
 	Array size has to be known at compile time. These are raw arrays.
-17. C++ 11 has dynamic arrays. 
+
+>>  C++ 11 has dynamic arrays. 
 	std::array<int, 5> arrayName; 
 	arrayName.size() will return 5. A bit of overhead, but usually worth the safety.
-18. c style strings: const char* name = "init"; 
+
+>>  c style strings: const char* name = "init"; 
 	but that's a fixed size/immutable. hence the precautionary const, not necessary. 
 	"example" by default means a char pointer, not a string. 
 	c++ has std::string that does a const char array. iostream has string already. 
@@ -75,7 +114,8 @@ The guidance from our sole lord and savior, Cherno.
 	void printFxn(const std::string& demo) { 
 	cout<<demo;
 	} to not make a copy
-19. string literals: "like this". What it becomes, depends on the situation. By default, this is a const char*
+
+>>  string literals: "like this". What it becomes, depends on the situation. By default, this is a const char*
 	But it isn't always const char*. C++ doesn't define what happens here. It's undefined behavior, and can break
 	in some compilers. Basically, treat it like const char* pls. It's because string literals are stored in the 
 	read-only part of the memory. msvc throws no errors here, but clang will.
@@ -83,23 +123,29 @@ The guidance from our sole lord and savior, Cherno.
 	char* name = "This means you are a bad person";
 	const char* name = "This is how it should be";
 	All of these are still in the read only part tho. We're overwriting if we're editing them.
-19B. wchar_t, char_16t, std::string_literals, R"something" to ignore escape characters (multi line string)
-20. const int* a = new int; 
+
+>>  wchar_t, char_16t, std::string_literals, R"something" to ignore escape characters (multi line string)
+
+>>  const int* a = new int; 
 	*a = 2 gives an error. a = variable gives no error. Data AT that memory is constant. 
 	int const* a does the same. 
 	But int* const a will protect the pointer. (think yourself: int* a vs int *a)
-21. Inside a class, func() const {} means no editing of the class attributes. e.g. a getter fxn. 
+
+>>  Inside a class, func() const {} means no editing of the class attributes. e.g. a getter fxn. 
 	const int* const func() const {} means we'll return a pointer whose data can't be modified, the pointer
 	can't be modified, and the function won't modify attributes. beware of passing const reference 
 	(cuz reference is pointer). const classtype instanceName; can't call functions that are not const.
-22. mutable overrides #21. const function can modify mutable attributes. Other use with lambdas.
-23. Lambdas are little throwaway functions inside your code. They run like real functions though. 
+
+>>  mutable overrides the previous point. const function can modify mutable attributes. Other use with lambdas.
+
+>>  Lambdas are little throwaway functions inside your code. They run like real functions though. 
 	If you pass a variable as reference, you can't touch it, unless you do 
 	auto f = [=]() mutable {
 	body
 	}. The = means by value. The variable you took to modify? will get modified inside the function, but will
 	return to its original glory once it's out. (This is a rare af case).
-24. Member initialiser list (vid 36 redo : write code) Performance advantage for types that are not the 
+
+>>  Member initialiser list (vid 36 redo : write code) Performance advantage for types that are not the 
 	primitive types, because we're calling the costructor fewer times.
 	className(int ex, int wy, int ze) 
 		: x(ex), y(wy), z(ze)
@@ -107,10 +153,12 @@ The guidance from our sole lord and savior, Cherno.
 	In case of primitive types, it doesn't matter whether you're using initialiser list or assigning in the body.
 	But otherwise, if x was an object, x(ex) inside the body would call x() first as we enter the body, then call
 	the constructor we want - x(ex). We created and threw away a class instance. This is a performance overhead.
-25. Ternary operator. 
+
+>>  Ternary operator. 
 	storage = condition ? value if true : value if false; 
 	This too can improve performance, because of return value optimisation in the equivalent normal code.
-26. stack has limited memory, like 1-2 mb. then allocate in the heap: className* instance = new className(param);
+
+>>  stack has limited memory, like 1-2 mb. then allocate in the heap: className* instance = new className(param);
 	java and c#, memory managed languages, by default construct in heap. We shouldn't do that in c++, cuz
 	we'll have to use: delete instance;. But wait, how to work with pointer shit? use -> operator. 
 	new returns a pointer to the allocated memory. only difference between 
@@ -118,7 +166,8 @@ The guidance from our sole lord and savior, Cherno.
 	Entity* e = (Entity*)malloc(sizeof(Entity)); is that new also calls the constructor. 
 	new int[], then use delete[] instead of delete. 
 	new(b) int initialises an int at the address b.
-27. implicit conversion (somewhere where C++ didn't, but should have, thrown an error).
+
+>>  implicit conversion (somewhere where C++ didn't, but should have, thrown an error).
 	C++ is only allowed to do one conversion. But this happens only in bad code. Write explicit in front of 
 	constructor names to make sure implicit conversion doesn't happen.
 	if the class has a constructor that takes one int, we can write shit like
@@ -127,15 +176,18 @@ The guidance from our sole lord and savior, Cherno.
 	but if the class has constructor using a string and we try
 	className instanceName = "I love you"; it fails. Because char* has to be converted to string, and then string
 	to className, which are 2 conversions, and C++ doesn't do 2 implicit conversions.
-28. operator overloading. java doesn't support operator overloading. C# does a little bit. 
+
+>>  operator overloading. java doesn't support operator overloading. C# does a little bit. 
 	Override ostream to cout << object:
 	std::ostream& operator<<(std::string& stream, const className instance)
 	{
 		stream << instance.x << ", " << instance.y;		//bacuse we've already overridden  << y 
 	}
-29. (*thing).x is thing->x. this keyword is a const className*. The pointer is const. Data can be edited. 
+
+>>  (*thing).x is thing->x. this keyword is a const className*. The pointer is const. Data can be edited. 
 	delete this; : use to make an explosion in runtime.
-30. smart pointer is a raw pointer wrapped in protective blanket of new and delete. 
+
+>>  smart pointer is a raw pointer wrapped in protective blanket of new and delete. 
 	#include <memory> 
 	std::unique_ptr <className> instanceName(new className()); 
 	instanceName = new className(); doesn't work because smart pointers don't support it. otherwise write 
@@ -144,7 +196,8 @@ The guidance from our sole lord and savior, Cherno.
 	so shared_ptr. it keeps a reference count. make a copy, reference++. when reference is 1, means the last 
 	pointer here, it will kill the data and free the memory. 
 	weak_ptr doesn't keep the counter and allows copying. no safety mechanism.
-31. By default when you copy a class instance, the values are the same. That means the pointers as well. 
+
+>>  By default when you copy a class instance, the values are the same. That means the pointers as well. 
 	Try to delete the memory at that address twice and you'll have an error. 
 	This is Shallow copy. We need a copy constructor to perform a deep copy.  The default copy constructor 
 	provided by C++ is: 
@@ -153,21 +206,34 @@ The guidance from our sole lord and savior, Cherno.
 		memcpy(this, &other, sizeof(className));
 	} 
 	Check copy constructor demo for a demo.
-31B. Always pass your objects by const reference. You shouldn't be passing around copies all the time. You can
+
+>>  Always pass your objects by const reference. You shouldn't be passing around copies all the time. You can
 	make your own copy if you need to, so there is literally no drawbacks. See Last example.
-32. className* ptr = &instance; 
+
+>>  className* ptr = &instance; 
 	className& stuff = *ptr;
-33. Dynamic array. standard template library. Vectors etc. 
+
+>>  Dynamic array. standard template library. Vectors etc. 
 	vector<int> stuff; 
 	stuff.push_back(34).
 	stuff.reserve(3). //doesn't construct 3 vectors, it just reserves the memory so  we don't have to move
 	stuff.emplace_back(parameter list) instead of push_back to not to a lot of copying.
-34. Library in C++: grab binaries (maybe compile yourself to get them). Static library means its included In 
+
+>>  Library in C++: grab binaries (maybe compile yourself to get them). Static library means its included In 
 	your exe. Dynamic will be linked in runtime (dll). In project properties you'll have to set locations of 
 	header and lib. Just the header will lead to a successful compile. But linker will fail then.
-35. returning two values from a function: 
+
+>>  returning two values from a function: 
 	return a struct, return a tuple (std template from <utility> and <functional>, which is an automatic struct),
 	return a pointer from where we calculate stuff (make sure it's heap allocated and undeleted), or 
 	make the parent provide with where to write stuff. Struct is nice, a shared program resource. 
-36. 2D arrays are not guaranteed to be a contiguous array. Better to get a 1D array and manage it properly. 
+
+>>  2D arrays are not guaranteed to be a contiguous array. Better to get a 1D array and manage it properly. 
 	Don't do pointer arithmetic, especially in the heap!!
+
+>>  int main(int argc, char* argv[]) to pass values to main 
+	argv[0] is just the name of the program. argv[1] is the first parameter.
+	use atoi(), atof(), atol() from <cstdlib> to convert from string to int, double, long
+
+>>  Thinking int* a vs int *a; int* a is how you should usually think, except:
+	int* a, b; creates int* a; int b;
