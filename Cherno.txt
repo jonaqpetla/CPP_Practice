@@ -229,6 +229,17 @@ The guidance from our sole lord and savior, Cherno. Also some additional snippet
 	} 
 	Check copy constructor demo for a demo.
 
+>>	Copy constructor is called when
+	className instance = previousInstance;
+	function(classInstanceByValue)
+	className instance = function()
+	the function returns a temporary copy of the object you created inside the function.
+	After assignment, that temporary object will get destroyed as well. Returning objects
+	created inside a function is a risky affair and we should be careful of all memory access'.
+	
+	instace_1 = instance_2; has similar concerns of illegal memory access, but is not handled by
+	copy constructor. To fix this one, we'll have to overload the '=' operator.
+
 >>  Always pass your objects by const reference. You shouldn't be passing around copies all the time. You can
 	make your own copy if you need to, so there is literally no drawbacks. See Last example.
 
