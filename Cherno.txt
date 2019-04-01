@@ -167,14 +167,14 @@ The guidance from our sole lord and savior, Cherno. Also some additional snippet
 	}. The = means by value. The variable you took to modify? will get modified inside the function, but will
 	return to its original glory once it's out. (This is a rare af case).
 
->>  Member initialiser list (vid 36 redo : write code) Performance advantage for types that are not the 
-	primitive types, because we're calling the costructor fewer times.
+>>  Member initialiser list. Performance advantage for types that are not the primitive types.
 	className(int ex, int wy, int ze) 
 		: x(ex), y(wy), z(ze)
 		{}	//list in order as the variables were declared in the class declaration
 	In case of primitive types, it doesn't matter whether you're using initialiser list or assigning in the body.
-	But otherwise, if x was an object, x(ex) inside the body would call x() first as we enter the body, then call
-	the constructor we want - x(ex). We created and threw away a class instance. This is a performance overhead.
+	But otherwise, if x was an object and we didn't include it in the list, and define x(ex) inside the body, 
+	it would call x() first as we enter the body, then call	the constructor we want - x(ex). 
+	We created and threw away a class instance. This is a performance overhead. If using initialiser list, embrace it completely
 
 >>  Ternary operator. 
 	storage = condition ? value if true : value if false; 
