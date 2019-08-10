@@ -2,3 +2,11 @@
 2. Heaps, heap sort
 3. Base converter for fractions
 4. Matrix library flesh out
+5. Tree, search, traversal
+6. Trie to show a dictionary
+7. Stack to see brackets balance
+8. Singly and doubly linked lists: new elements, 
+	change value of element, retrieve element, 
+	remove, insert elments anywhere
+9. Hash table
+10. Memoization techniques

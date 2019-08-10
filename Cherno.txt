@@ -249,7 +249,7 @@ The guidance from our sole lord and savior, Cherno. Also some additional snippet
 >>  Dynamic array. standard template library. Vectors etc. 
 	vector<int> stuff; 
 	stuff.push_back(34).
-	stuff.reserve(3). //doesn't construct 3 vectors, it just reserves the memory so  we don't have to move
+	stuff.reserve(3). //doesn't construct 3 ints, it just reserves the memory so  we don't have to move
 	stuff.emplace_back(parameter list) instead of push_back to not to a lot of copying.
 
 >>  Library in C++: grab binaries (maybe compile yourself to get them). Static library means its included In 
