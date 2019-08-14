@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28010.2036
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29201.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "StartingPoint", "StartingPoint\StartingPoint.vcxproj", "{254802DA-4BFE-46E5-9240-43CDB9EC2AD7}"
 EndProject
@@ -28,6 +28,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Text Files", "Text Files", "{BE54831F-4A5F-4EB9-8F4D-43CA86CF5C33}"
 	ProjectSection(SolutionItems) = preProject
 		Cherno.txt = Cherno.txt
+		Competitive.txt = Competitive.txt
 		Summary.txt = Summary.txt
 		ToDo.txt = ToDo.txt
 	EndProjectSection

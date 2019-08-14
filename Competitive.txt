@@ -1,0 +1,16 @@
+New concepts from online problems are mentioned here. This is a revision sheet, not a tutorial. 
+Things are to be kept short and vague. Started the file since Codechef August 2019 long challenge
+
+>> Chinese Remainder Theorem:
+Very common in competitions. Statement is, . Use is, .
+
+>> Digit DP:
+Can reduce a 2D memoization problem to 1D if there is a relation among them. eg. if 
+func(i,j) = func(0, j) - func(0, i), we can memoize func(0, n) for all required n. n operations required
+instead of nearly n^2.
+
+>> Difference Array:
+First saw in Codechef problem ZOMCAV, where we had to +1 for a range of array indices according to some
+instruction array (O(n^2)). Instead, if we prep the instructions as a difference array: write +1 to starting
+index and -1 to ending index, for all instructions, and then excute them at one go, we can drastically cut
+down on the time required (O(n): 2n time to prep the difference array, n to populate the final array).
