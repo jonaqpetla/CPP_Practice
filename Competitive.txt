@@ -2,7 +2,15 @@ New concepts from online problems are mentioned here. This is a revision sheet, 
 Things are to be kept short and vague. Started the file since Codechef August 2019 long challenge
 
 >> Chinese Remainder Theorem:
-Very common in competitions. Statement is, . Use is, .
+Common in competitions. Statement is, there a k co-prime ints (n_i) and k remainders (a_i) less than 
+the ints, then there exists one and only one integer (x) less than the product of all the ints such that 
+x % n_i = a_i for all i. Valid over principal ideal domains. Usually seen when the online judge can't really 
+handle the big numbers and you are asked to do math modulo (not a prime). Factorize into prime factors,
+compute the modulos, combine using CRT as answer = sum (modulo_result_i*factor_i) where factor_i % n_j
+= kroneker delta. ( 10^9 + 7 ) is a prime btw, and CRT need not be applied to cases where answer is % that.
+
+>> Don't do overflow and then %, be careful. (a*b) % M = ((a % M) * (b % M)) % M, same for +,-. Division 
+modulo M may not be defined, but is defined when M is prime or prime power (because then it's a field).
 
 >> Digit DP:
 Can reduce a 2D memoization problem to 1D if there is a relation among them. eg. if 
@@ -14,3 +22,13 @@ First saw in Codechef problem ZOMCAV, where we had to +1 for a range of array in
 instruction array (O(n^2)). Instead, if we prep the instructions as a difference array: write +1 to starting
 index and -1 to ending index, for all instructions, and then excute them at one go, we can drastically cut
 down on the time required (O(n): 2n time to prep the difference array, n to populate the final array).
+
+>> GCD (a, b) = GCD (a, b / a), a is smaller than b
+
+>> Tabulation vs Memoization: Top down vs bottom up approaches. 
+If all smaller problems need to be solved, tabulation outperforms memoization by a const factor due to 
+the call stack depth. Memoization only populates the cells in the table that are actually required.
+
+>> That rectangle problem: find area covered by random rectangles, not rotated
+We tried to find some clever way to split the rectangles to make disjoint rectangles, but a simple polling
+of a grid would have been fine. That problem didn't require a clever solution.
