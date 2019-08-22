@@ -32,3 +32,5 @@ the call stack depth. Memoization only populates the cells in the table that are
 >> That rectangle problem: find area covered by random rectangles, not rotated
 We tried to find some clever way to split the rectangles to make disjoint rectangles, but a simple polling
 of a grid would have been fine. That problem didn't require a clever solution.
+
+>> 

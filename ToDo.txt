@@ -1,12 +1,19 @@
 1. Polish dijkstra
-2. Heaps, heap sort
+2. Heaps, heap sort, binomial heap, fibonacci heap
 3. Base converter for fractions
 4. Matrix library flesh out
-5. Tree, search, traversal
+5. Tree, search, traversal, red-black trees, ternary search trees, B trees, B+ trees  
 6. Trie to show a dictionary
 7. Stack to see brackets balance
 8. Singly and doubly linked lists: new elements, 
 	change value of element, retrieve element, 
-	remove, insert elments anywhere
-9. Hash table
-10. Memoization techniques
+	remove, insert elments anywhere. Skip list
+9. Hashing and hash table
+10. Memoization techniques, memoization, tabulation, digit dp
+11. Stacks, paratheses matching
+12. Queues
+13. Graphs, spanning trees.
+14. Just write algorithm analysis techniques
+15. Complexity classes of algorithms
+16. Pattern searching
+17. Tree balancing - AVL trees
