@@ -10,6 +10,7 @@ The guidance from our sole lord and savior, Cherno. Also some additional snippet
 
 >>  13 is a decimal int. 0b1101 is a binary. 015 is octal. 0x0D is hex.
 	std::cout << std::hex << (int)n; or std::cout << std::oct << n; //nothing for binary :(
+
 >>  replace
 	#define replace 0
 	replacethis replace(fun) fun(replace) // will output:
@@ -20,7 +21,21 @@ The guidance from our sole lord and savior, Cherno. Also some additional snippet
 	g++ -E filename > filename.afterpreprocessing or cl /P filename so preprocess to file
 
 >>  compiler makes translation files, linker links them. #include will copy paste all the code into one file,
-	that's not necessary if we have a linker.
+	that's not necessary if we have a linker. Our codes need the function prototypes to compile. The body of those
+	functions need to compile only once (we'll get errors if multiple objects with the same signature is present 
+	because the linker will get cofused). Multiple signatures will cause a linker error. But we'll need to include 
+	at least a signature to make sure that our files compile first. Solutions? 
+	1. if your header file contains definitions as well, you can mark it static. In that case, every file that uses
+	your header will get its own version of the functions, linker won't look outside the translation unit.
+	2. make the functions inline. That way, the function doesn't even exist in real life.
+	3. (Recommended) move the definition of your functions into one translation unit only.
+	*. #ifndef DEF, #define DEF, <body> #endif to make sure you include it only once in your translation unit.
+	Equivalently #pragma once <body>. Works in case you're working with only one translation unit.
+
+>>  C# or Java doesn't have this concept of two different types of files - headers and codes
+
+>>  Precompiled headers to save time. No need to recompile every time. #include <WINDOWS> is basically 1000s of
+	other headers, a huge time hog. Use pch.h to save time not compiling things that you rarely change.
 
 >>  Debug magic: right click to view disassembly. debug>window>memory to view stack in VS
 
@@ -91,6 +106,14 @@ The guidance from our sole lord and savior, Cherno. Also some additional snippet
 	public: className() = delete; //gets rid of the default constructor
 
 >>  0.0f means float 0. e.g. float i = 13.45f; 0.0 will default to double. (double and ints are defaults)
+
+>>  float structure: 1.x * 2 ^ (y - 127) * (-1)^z : x  is 23 bits, y is 8 bits, z is 1 bit. Stored zyx.
+Big/little endian does not apply here. Extract and test on FloatEndian cpp.
+
+>>  big endian, little endian systems: windows stores int 10 as 10 in first byte, then byte(0) byte(0) byte(0)
+instead of byte(0) byte(0) byte(0) 10 in last byte. Programs handle this properly, even while doing bit 
+manipulations, but if you manually change the pointers to point to the next byte and expect things to work
+out properly, you're in for some pain. Most systems are big endian (the natural one). Windows is little endian.
 
 >>  destructor. ~className(). Stack allocated vs heap allocated memory. Can avoid usually.
 

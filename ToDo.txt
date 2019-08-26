@@ -17,3 +17,5 @@
 15. Complexity classes of algorithms
 16. Pattern searching
 17. Tree balancing - AVL trees
+18. Other graph algorithms
+19. Templates to go with stl
