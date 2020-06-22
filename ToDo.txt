@@ -18,4 +18,3 @@
 16. Pattern searching
 17. Tree balancing - AVL trees
 18. Other graph algorithms
-19. Concurrency and Parallelism basics
