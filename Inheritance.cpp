@@ -1,7 +1,6 @@
 // Member initializer list, inheritance, protected, construction order etc.
 // clarify virtual class stuff
 
-#include "pch.h"
 #include <iostream>
 
 class Base

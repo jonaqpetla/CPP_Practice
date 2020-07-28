@@ -1,7 +1,5 @@
-// callStackExample.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
+// Beautiful call stack example inspired by Tryst 2019's competition
 
-#include "pch.h"
 #include <iostream>
 
 void f(char* s)
@@ -21,7 +19,7 @@ int main()
 
     std::cout << "Enter string: ";
 	char s[100];
-	gets_s(s);
+	gets(s);
 	f(s);
 	return 0;
 }

@@ -6,7 +6,6 @@
 // start node, end node, number of nodes, array* of nodes, array** connection map
 // returns int min dist and also edits the array* nodes if you want the path info
 
-#include "pch.h"
 #include <iostream>
 using namespace std;
 

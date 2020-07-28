@@ -2,7 +2,6 @@
 // Each node could be an object with a public value. It enters the linked list in a sorted manner.
 // Queue is another object. It has Nodes as members. Here the nodes are just ints.
 
-#include "pch.h"
 #include <iostream>
 
 class Queue
